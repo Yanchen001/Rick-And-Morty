@@ -1,4 +1,4 @@
-
+import { createCharacterCard } from "./components/card/card.js"
 
 
 const cardContainer = document.querySelector('[data-js="card-container"]');
@@ -20,8 +20,18 @@ const searchQuery = "";
 async function fetchCharacters(){
   const response = await fetch("https://rickandmortyapi.com/api/character/")
   const data = await response.json();
-  console.log(data)
-}
+  console.log(data);
 
-fetchCharacters()
+  data.results.forEach((result)=>{
+    let image = result.image;
+    let name = result.name;
+    let status = result.status;
+    let type = result.type;
+    let episodes = result.episodes
+
+    console.log(result);
+    cardContainer.append(createCharacterCard(image,name,status,type,episodes));
+  })
+}
+fetchCharacters();
 
